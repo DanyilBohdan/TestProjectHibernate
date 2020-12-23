@@ -22,9 +22,10 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @Transactional
-    public void create(Product product) {
+    public Product create(Product product) {
         Session session = sessionFactory.getCurrentSession();
         session.save(product);
+        return product;
     }
 
     @Override

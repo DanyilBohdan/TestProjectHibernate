@@ -34,7 +34,7 @@ public class HibernateConfiguration {
     public LocalSessionFactoryBean sessionFactory() throws SQLException {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(mySQLDataSource());
-        sessionFactory.setPackagesToScan("com.epam.hibernate" );
+        sessionFactory.setPackagesToScan("com.epam.homework" );
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
