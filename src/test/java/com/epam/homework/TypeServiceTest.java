@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.epam.homework.GenerateEntity.createSubTypeDto;
 import static com.epam.homework.GenerateEntity.createTypeDto;
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -1,10 +1,6 @@
 package com.epam.homework.entity;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
-
 
 @Entity
 @Table(name = "product")

@@ -1,6 +1,7 @@
 package com.epam.homework.service;
 
 import com.epam.homework.assembler.SubTypeAssembler;
+import com.epam.homework.dao.ProductDao;
 import com.epam.homework.dao.SubTypeDao;
 import com.epam.homework.dto.ProductDto;
 import com.epam.homework.dto.SubTypeDto;
@@ -14,16 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SubTypeServiceImpl implements SubTypeService{
-    
+public class SubTypeServiceImpl implements SubTypeService {
+
     private final SubTypeAssembler subTypeAssembler;
-    
+
     private final SubTypeDao subTypeDao;
 
+    private final ProductDao productDao;
+
     @Autowired
-    public SubTypeServiceImpl(SubTypeAssembler subTypeAssembler, SubTypeDao subTypeDao) {
+    public SubTypeServiceImpl(SubTypeAssembler subTypeAssembler, SubTypeDao subTypeDao,
+                              ProductDao productDao) {
         this.subTypeAssembler = subTypeAssembler;
         this.subTypeDao = subTypeDao;
+        this.productDao = productDao;
     }
 
     @Override
@@ -56,6 +61,9 @@ public class SubTypeServiceImpl implements SubTypeService{
         SubType subType = subTypeDao.get(subTypeDto.getId());
         SubType updateSubType = subTypeAssembler.assemble(subTypeDto);
 
+        for (Product product : subType.getProductList()) {
+            productDao.delete(product.getId());
+        }
         subTypeDao.delete(subType.getId());
 
         subType.setId(updateSubType.getId());

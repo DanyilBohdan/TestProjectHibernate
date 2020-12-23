@@ -2,6 +2,7 @@ package com.epam.homework;
 
 import com.epam.homework.cfg.HibernateConfiguration;
 import com.epam.homework.dto.SubTypeDto;
+import com.epam.homework.entity.Product;
 import com.epam.homework.service.SubTypeService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
