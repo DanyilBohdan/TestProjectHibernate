@@ -6,7 +6,6 @@ import com.epam.homework.dto.ProductDto;
 import com.epam.homework.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
     public ProductDto get(Integer id) {
         Product product = productDao.get(id);
         return productAssembler.assemble(product);

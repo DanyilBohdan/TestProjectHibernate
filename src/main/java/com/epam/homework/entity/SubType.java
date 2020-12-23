@@ -1,9 +1,7 @@
 package com.epam.homework.entity;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +18,7 @@ public class SubType {
     private Type type;
 
     @OneToMany(mappedBy = "subType", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> productList;
+    private List<Product> productList = new ArrayList<>();
 
     public Integer getId() {
         return id;

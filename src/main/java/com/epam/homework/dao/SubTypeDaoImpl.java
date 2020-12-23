@@ -1,6 +1,5 @@
 package com.epam.homework.dao;
 
-import com.epam.homework.entity.Product;
 import com.epam.homework.entity.SubType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,20 +11,21 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class SubTypeImpl implements SubTypeDao {
+public class SubTypeDaoImpl implements SubTypeDao {
 
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public SubTypeImpl(SessionFactory sessionFactory) {
+    public SubTypeDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
     @Transactional
-    public void create(SubType subType) {
+    public SubType create(SubType subType) {
         Session session = sessionFactory.getCurrentSession();
         session.save(subType);
+        return subType;
     }
 
     @Override

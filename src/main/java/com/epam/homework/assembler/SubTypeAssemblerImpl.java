@@ -50,6 +50,6 @@ public class SubTypeAssemblerImpl implements SubTypeAssembler {
             productDtoList.add(productAssembler.assemble(product));
         }
         subTypeDto.setProductList(productDtoList);
-        return null;
+        return subTypeDto;
     }
 }

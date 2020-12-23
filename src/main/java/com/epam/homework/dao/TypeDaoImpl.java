@@ -22,9 +22,10 @@ public class TypeDaoImpl implements TypeDao {
 
     @Override
     @Transactional
-    public void create(Type type) {
+    public Type create(Type type) {
         Session session = sessionFactory.getCurrentSession();
         session.save(type);
+        return type;
     }
 
     @Override

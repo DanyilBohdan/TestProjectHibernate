@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SubTypeDao {
 
-    void create(SubType subType);
+    SubType create(SubType subType);
 
     List<SubType> getAll();
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TypeDao {
 
-    void create(Type type);
+    Type create(Type type);
 
     List<Type> getAll();
 
