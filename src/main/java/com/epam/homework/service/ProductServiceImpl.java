@@ -6,9 +6,11 @@ import com.epam.homework.dto.ProductDto;
 import com.epam.homework.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -23,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDto create(ProductDto productDto) {
         Product product = productAssembler.assemble(productDto);
         product = productDao.create(product);
@@ -30,12 +33,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto get(Integer id) {
+    @Transactional
+    public ProductDto get(UUID id) {
         Product product = productDao.get(id);
         return productAssembler.assemble(product);
     }
 
     @Override
+    @Transactional
     public List<ProductDto> getAll() {
         List<Product> productList = productDao.getAll();
         List<ProductDto> productDtoList = new ArrayList<>(productList.size());
@@ -46,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDto update(ProductDto productDto) {
         Product product = productDao.get(productDto.getId());
         Product updateProduct = productAssembler.assemble(productDto);
@@ -65,7 +71,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(Integer id) {
+    @Transactional
+    public void delete(UUID id) {
         productDao.delete(id);
     }
 }

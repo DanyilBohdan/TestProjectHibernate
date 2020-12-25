@@ -5,10 +5,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {
@@ -21,7 +21,6 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    @Transactional
     public Product create(Product product) {
         Session session = sessionFactory.getCurrentSession();
         session.save(product);
@@ -30,30 +29,26 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    @Transactional(readOnly = true)
     public List<Product> getAll() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Product").list();
     }
 
     @Override
-    @Transactional
-    public List<Product> getByIds(List<Integer> ids) {
+    public List<Product> getByIds(List<UUID> ids) {
         Session session = sessionFactory.getCurrentSession();
         return session.byMultipleIds(Product.class).multiLoad(ids);
     }
 
     @Override
-    @Transactional
-    public Product get(Integer id) {
+    public Product get(UUID id) {
         Session session = sessionFactory.getCurrentSession();
         Product product = session.get(Product.class, id);
         return Objects.requireNonNull(product, "Product not found by id: " + id);
     }
 
     @Override
-    @Transactional
-    public void delete(Integer id) {
+    public void delete(UUID id) {
         Product product = get(id);
         sessionFactory.getCurrentSession().delete(product);
     }

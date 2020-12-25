@@ -3,6 +3,7 @@ package com.epam.homework.dao;
 import com.epam.homework.entity.Type;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface TypeDao {
 
@@ -10,9 +11,9 @@ public interface TypeDao {
 
     List<Type> getAll();
 
-    List<Type> getByIds(List<Integer> ids);
+    List<Type> getByIds(List<UUID> ids);
 
-    Type get(Integer id);
+    Type get(UUID id);
 
-    void delete(Integer id);
+    void delete(UUID id);
 }

@@ -2,10 +2,12 @@ package com.epam.homework.dto;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class ProductDto {
 
-    private Integer id;
+    private UUID id;
 
     private String name;
 
@@ -15,5 +17,5 @@ public class ProductDto {
 
     private String brand;
 
-    private Integer subTypeId;
+    private UUID subTypeId;
 }

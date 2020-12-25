@@ -3,6 +3,7 @@ package com.epam.homework.dao;
 import com.epam.homework.entity.SubType;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface SubTypeDao {
 
@@ -10,9 +11,9 @@ public interface SubTypeDao {
 
     List<SubType> getAll();
 
-    List<SubType> getByIds(List<Integer> ids);
+    List<SubType> getByIds(List<UUID> ids);
 
-    SubType get(Integer id);
+    SubType get(UUID id);
 
-    void delete(Integer id);
+    void delete(UUID id);
 }

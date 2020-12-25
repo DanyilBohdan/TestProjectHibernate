@@ -3,7 +3,6 @@ package com.epam.homework.service;
 import com.epam.homework.assembler.SubTypeAssembler;
 import com.epam.homework.dao.ProductDao;
 import com.epam.homework.dao.SubTypeDao;
-import com.epam.homework.dto.ProductDto;
 import com.epam.homework.dto.SubTypeDto;
 import com.epam.homework.entity.Product;
 import com.epam.homework.entity.SubType;
@@ -13,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SubTypeServiceImpl implements SubTypeService {
@@ -32,6 +32,7 @@ public class SubTypeServiceImpl implements SubTypeService {
     }
 
     @Override
+    @Transactional
     public SubTypeDto create(SubTypeDto subTypeDto) {
         SubType subType = subTypeAssembler.assemble(subTypeDto);
         subType = subTypeDao.create(subType);
@@ -40,7 +41,7 @@ public class SubTypeServiceImpl implements SubTypeService {
 
     @Override
     @Transactional(readOnly = true)
-    public SubTypeDto get(Integer id) {
+    public SubTypeDto get(UUID id) {
         SubType subType = subTypeDao.get(id);
         return subTypeAssembler.assemble(subType);
     }
@@ -57,6 +58,7 @@ public class SubTypeServiceImpl implements SubTypeService {
     }
 
     @Override
+    @Transactional
     public SubTypeDto update(SubTypeDto subTypeDto) {
         SubType subType = subTypeDao.get(subTypeDto.getId());
         SubType updateSubType = subTypeAssembler.assemble(subTypeDto);
@@ -77,7 +79,8 @@ public class SubTypeServiceImpl implements SubTypeService {
     }
 
     @Override
-    public void delete(Integer id) {
+    @Transactional
+    public void delete(UUID id) {
         subTypeDao.delete(id);
     }
 }

@@ -1,14 +1,15 @@
 package com.epam.homework.entity;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
-@Table(name = "product")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "product")
-    private Integer id;
+    @Column(length = 16)
+    @GeneratedValue
+    private UUID id;
 
     private String name;
 
@@ -21,11 +22,11 @@ public class Product {
     @ManyToOne
     private SubType subType;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

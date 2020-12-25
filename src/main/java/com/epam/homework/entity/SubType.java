@@ -3,14 +3,15 @@ package com.epam.homework.entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "subtype")
 public class SubType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "subtype")
-    private Integer id;
+    @Column(length = 16)
+    @GeneratedValue
+    private UUID id;
 
     private String name;
 
@@ -20,11 +21,11 @@ public class SubType {
     @OneToMany(mappedBy = "subType", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> productList = new ArrayList<>();
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

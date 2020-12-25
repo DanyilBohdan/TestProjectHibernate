@@ -1,6 +1,5 @@
 package com.epam.homework.assembler;
 
-import com.epam.homework.dao.TypeDao;
 import com.epam.homework.dto.ProductDto;
 import com.epam.homework.dto.SubTypeDto;
 import com.epam.homework.entity.Product;
@@ -14,12 +13,10 @@ import java.util.List;
 @Service
 public class SubTypeAssemblerImpl implements SubTypeAssembler {
 
-    private final TypeDao typeDao;
     private final ProductAssembler productAssembler;
 
     @Autowired
-    public SubTypeAssemblerImpl(TypeDao typeDao, ProductAssembler productAssembler) {
-        this.typeDao = typeDao;
+    public SubTypeAssemblerImpl(ProductAssembler productAssembler) {
         this.productAssembler = productAssembler;
     }
 
@@ -28,7 +25,6 @@ public class SubTypeAssemblerImpl implements SubTypeAssembler {
         SubType subType = new SubType();
         subType.setId(subTypeDto.getId());
         subType.setName(subTypeDto.getName());
-        subType.setType(typeDao.get(subTypeDto.getTypeId()));
         List<ProductDto> productDtoList = subTypeDto.getProductList();
         List<Product> products = new ArrayList<>(productDtoList.size());
         for (ProductDto productDto : productDtoList) {
@@ -43,7 +39,6 @@ public class SubTypeAssemblerImpl implements SubTypeAssembler {
         SubTypeDto subTypeDto = new SubTypeDto();
         subTypeDto.setId(subType.getId());
         subTypeDto.setName(subType.getName());
-        subTypeDto.setTypeId(subType.getType().getId());
         List<Product> products = subType.getProductList();
         List<ProductDto> productDtoList = new ArrayList<>(products.size());
         for (Product product : products) {

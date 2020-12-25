@@ -6,14 +6,13 @@ import com.epam.homework.dto.TypeDto;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 public class GenerateEntity {
 
     public static TypeDto createTypeDto(String name){
         TypeDto typeDto = new TypeDto();
         typeDto.setName(name);
-        typeDto.setSubTypeDtoList(Arrays.asList(createSubTypeDto(RandomStringUtils.randomAlphabetic(15)),
-                createSubTypeDto(RandomStringUtils.randomAlphabetic(15))));
 
         return typeDto;
     }
@@ -21,7 +20,7 @@ public class GenerateEntity {
     public static SubTypeDto createSubTypeDto(String name){
         SubTypeDto subTypeDto = new SubTypeDto();
         subTypeDto.setName(name);
-        subTypeDto.setTypeId(1);
+        subTypeDto.setTypeId(UUID.randomUUID());
         subTypeDto.setProductList(Arrays.asList(createProductDto(RandomStringUtils.randomAlphabetic(15)),
                 createProductDto(RandomStringUtils.randomAlphabetic(15))));
 
@@ -34,7 +33,7 @@ public class GenerateEntity {
         productDto.setPrice(1200f);
         productDto.setBrand("BrandTest");
         productDto.setCount(4);
-        productDto.setSubTypeId(1);
+        productDto.setSubTypeId(UUID.randomUUID());
 
         return productDto;
     }

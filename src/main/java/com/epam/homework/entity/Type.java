@@ -1,30 +1,23 @@
 package com.epam.homework.entity;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "type")
 public class Type {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "type")
-    private Integer id;
+    @Column(length = 16)
+    @GeneratedValue
+    private UUID id;
 
     private String name;
 
-    @OneToMany(mappedBy = "type", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubType> subTypes = new ArrayList<>();
-
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -34,13 +27,5 @@ public class Type {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<SubType> getSubTypes() {
-        return subTypes;
-    }
-
-    public void setSubTypes(List<SubType> subTypes) {
-        this.subTypes = subTypes;
     }
 }

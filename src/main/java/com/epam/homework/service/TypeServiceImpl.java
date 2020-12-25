@@ -2,9 +2,7 @@ package com.epam.homework.service;
 
 import com.epam.homework.assembler.TypeAssembler;
 import com.epam.homework.dao.TypeDao;
-import com.epam.homework.dto.SubTypeDto;
 import com.epam.homework.dto.TypeDto;
-import com.epam.homework.entity.SubType;
 import com.epam.homework.entity.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TypeServiceImpl implements TypeService{
@@ -27,6 +26,7 @@ public class TypeServiceImpl implements TypeService{
     }
 
     @Override
+    @Transactional
     public TypeDto create(TypeDto typeDto) {
         Type type = typeAssembler.assemble(typeDto);
         type = typeDao.create(type);
@@ -35,7 +35,7 @@ public class TypeServiceImpl implements TypeService{
 
     @Override
     @Transactional
-    public TypeDto get(Integer id) {
+    public TypeDto get(UUID id) {
         return typeAssembler.assemble(typeDao.get(id));
     }
 
@@ -44,13 +44,14 @@ public class TypeServiceImpl implements TypeService{
     public List<TypeDto> getAll() {
         List<Type> typeList = typeDao.getAll();
         List<TypeDto> typeDtoList = new ArrayList<>(typeList.size());
-        for (Type subType : typeList) {
-            typeDtoList.add(typeAssembler.assemble(subType));
+        for (Type type : typeList) {
+            typeDtoList.add(typeAssembler.assemble(type));
         }
         return typeDtoList;
     }
 
     @Override
+    @Transactional
     public TypeDto update(TypeDto typeDto) {
         Type type = typeDao.get(typeDto.getId());
         Type updateType = typeAssembler.assemble(typeDto);
@@ -59,7 +60,6 @@ public class TypeServiceImpl implements TypeService{
 
         type.setId(updateType.getId());
         type.setName(updateType.getName());
-        type.setSubTypes(updateType.getSubTypes());
 
         type = typeDao.create(type);
 
@@ -67,7 +67,8 @@ public class TypeServiceImpl implements TypeService{
     }
 
     @Override
-    public void delete(Integer id) {
+    @Transactional
+    public void delete(UUID id) {
         typeDao.delete(id);
     }
 }

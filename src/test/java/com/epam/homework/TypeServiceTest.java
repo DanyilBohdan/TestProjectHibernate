@@ -1,11 +1,11 @@
 package com.epam.homework;
 
 import com.epam.homework.cfg.HibernateConfiguration;
-import com.epam.homework.dto.SubTypeDto;
 import com.epam.homework.dto.TypeDto;
 import com.epam.homework.service.TypeService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 import static com.epam.homework.GenerateEntity.createTypeDto;
 
@@ -24,9 +24,34 @@ public class TypeServiceTest {
     @Autowired
     private TypeService typeService;
 
+    private List<TypeDto> typeDtoList = new ArrayList<>();
+
+    @Before
+    public void init(){
+        typeDtoList = Arrays.asList(
+                createTypeDto(RandomStringUtils.randomAlphabetic(15)),
+                createTypeDto(RandomStringUtils.randomAlphabetic(15)),
+                createTypeDto(RandomStringUtils.randomAlphabetic(15)),
+                createTypeDto(RandomStringUtils.randomAlphabetic(15))
+        );
+    }
+
     @Test
+    @Transactional
     public void getAll() {
-        System.out.println(typeService.getAll());
+        for (TypeDto typeDto : typeDtoList) {
+            typeService.create(typeDto);
+        }
+        List<TypeDto> actualList = typeService.getAll();
+
+
+        typeDtoList.sort(Comparator.comparing(TypeDto::getName));
+
+        actualList.sort(Comparator.comparing(TypeDto::getName));
+
+        for (int i = 0; i < typeDtoList.size(); i++) {
+            Assert.assertEquals(typeDtoList.get(i).getName(), actualList.get(i).getName());
+        }
     }
 
     @Test
@@ -38,6 +63,7 @@ public class TypeServiceTest {
     }
 
     @Test
+    @Transactional
     public void deleteTypeTest() {
         TypeDto typeDto = createTypeDto(RandomStringUtils.randomAlphabetic(15));
         TypeDto createdTypeDto = typeService.create(typeDto);
