@@ -80,7 +80,7 @@ public class TypeServiceTest {
         TypeDto createdTypeDto = typeService.create(typeDto);
         createdTypeDto.setName(RandomStringUtils.randomAlphabetic(15));
         TypeDto updatedTypeDto = typeService.update(createdTypeDto);
-        typeDto = typeService.get(updatedTypeDto.getId());
+        typeDto = typeService.get(createdTypeDto.getId());
         Assert.assertEquals(typeDto.getName(), updatedTypeDto.getName());
     }
 }

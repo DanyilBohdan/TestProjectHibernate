@@ -82,7 +82,7 @@ public class SubTypeServiceTest {
         SubTypeDto createdSubTypeDto = subTypeService.create(subTypeDto);
         createdSubTypeDto.setName(RandomStringUtils.randomAlphabetic(15));
         SubTypeDto updatedSubTypeDto = subTypeService.update(createdSubTypeDto);
-        subTypeDto = subTypeService.get(updatedSubTypeDto.getId());
+        subTypeDto = subTypeService.get(createdSubTypeDto.getId());
         Assert.assertEquals(subTypeDto.getName(), updatedSubTypeDto.getName());
     }
 }
