@@ -63,17 +63,10 @@ public class SubTypeServiceImpl implements SubTypeService {
         SubType subType = subTypeDao.get(subTypeDto.getId());
         SubType updateSubType = subTypeAssembler.assemble(subTypeDto);
 
-        for (Product product : subType.getProductList()) {
-            productDao.delete(product.getId());
-        }
-        subTypeDao.delete(subType.getId());
-
         subType.setId(updateSubType.getId());
         subType.setName(updateSubType.getName());
         subType.setType(updateSubType.getType());
         subType.setProductList(updateSubType.getProductList());
-
-        subType = subTypeDao.create(subType);
 
         return subTypeAssembler.assemble(subType);
     }

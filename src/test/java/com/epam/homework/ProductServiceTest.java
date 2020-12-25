@@ -90,7 +90,7 @@ public class ProductServiceTest {
         ProductDto createdProduct = productService.create(productDto);
         createdProduct.setCount(createdProduct.getCount() + 10);
         ProductDto updateProduct = productService.update(createdProduct);
-        productDto = productService.get(updateProduct.getId());
+        productDto = productService.get(createdProduct.getId());
         Assert.assertEquals(productDto.getCount(), updateProduct.getCount());
     }
 

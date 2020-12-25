@@ -56,16 +56,12 @@ public class ProductServiceImpl implements ProductService {
         Product product = productDao.get(productDto.getId());
         Product updateProduct = productAssembler.assemble(productDto);
 
-        productDao.delete(product.getId());
-
         product.setId(updateProduct.getId());
         product.setName(updateProduct.getName());
         product.setPrice(updateProduct.getPrice());
         product.setCount(updateProduct.getCount());
         product.setBrand(updateProduct.getBrand());
         product.setSubType(updateProduct.getSubType());
-
-        product = productDao.create(product);
 
         return productAssembler.assemble(product);
     }

@@ -56,12 +56,8 @@ public class TypeServiceImpl implements TypeService{
         Type type = typeDao.get(typeDto.getId());
         Type updateType = typeAssembler.assemble(typeDto);
 
-        typeDao.delete(type.getId());
-
         type.setId(updateType.getId());
         type.setName(updateType.getName());
-
-        type = typeDao.create(type);
 
         return typeAssembler.assemble(type);
     }
